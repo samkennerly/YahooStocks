@@ -5,10 +5,10 @@ Import historical stock/index/ETF data into pandas from Yahoo! Finance.
 Gets these variables: ['Open','High','Low','Close','Volume','Adj Close'].
 Also calculates ['Dividend','ShareMultiplier','TotalValue'].
 
-'ShareMultiplier' is "How many shares I would have if I bought 1 share on start_date".
+'ShareMultiplier' is "How many shares would I have if I bought 1 share on start_date?"
 
-'TotalValue' is "How much cash I would have if I bought 1 share on start_date,
-saved (at 0% interest) all the cash dividends I received, and sold all my shares today?"
+'TotalValue' is "How much cash would I have if I bought 1 share on start_date,
+saved all the cash dividends I received, and sold all my shares today?"
 
 Copyright (c) 2015, Sam Kennerly. All rights reserved.
 Licensed under the BSD 3-clause license. (Scroll to bottom for license.)
@@ -25,7 +25,7 @@ def make_url(
 	freq='d'):
 	# Create url to download raw CSV data from Yahoo! Finance.
 	# start_date and stop_date can be any format recognized by pd.to_datetime().
-	# freq must be one of ['d','w','m'] meaning daily, weekly, monthly
+	# freq must be one of ['d','w','m'] meaning daily, weekly, monthly.
 	
 	symbol 		= symbol.upper()
 	start_date 	= pd.to_datetime(start_date)
@@ -91,8 +91,6 @@ def get_table(*args,**kwargs):
 		df['Dividend'] 	= 0.0
 	
 	# Splits are stored as strings, e.g. '2:1'. That's not very helpful.
-	# ShareMultiplier is the answer to "If I bought 1 share on start_date, then
-	# how many shares would I have now"?
 	if 'SPLIT' in event_types:
 		splits 	= extra_stuff.loc[extra_stuff['EventType']=='SPLIT','Value'].astype(str)	
 		def split_ratio(x):
@@ -119,7 +117,7 @@ def load(
 	stop_date=dt.date.today(),
 	freq='d',
 	verbose=True):
-	# Get data for multiple symbols and align it. Returns a dictionary of DataFrames.
+	# Get data for multiple symbols. Returns a dictionary of DataFrames.
 	# Each DataFrame stores one variable (e.g 'TotalValue') for all symbols.
 	# symbol_list should be a list of strings, e.g. ['SPY','AAPL','^GSPC']
 	# Set verbose = False to disable printing to screen.
@@ -138,7 +136,6 @@ def load(
 	p = p.transpose(2,1,0)
 	
 	return dict(p)
-
 
 
 '''
