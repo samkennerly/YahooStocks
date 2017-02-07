@@ -9,7 +9,6 @@ Also calculates ['Dividend','ShareMultiplier','TotalValue'].
 
 'TotalValue' is "How much cash would I have if I bought 1 share on start_date,
 saved all the cash dividends I received, and sold all my shares today?"
-
 """
 import pandas as pd
 import numpy as np
@@ -21,9 +20,11 @@ def make_url(
 	start_date	= '2000-1-1',
 	stop_date	= dt.date.today(),
 	freq		= 'd'):
-	# Create url to download raw CSV data from Yahoo! Finance.
-	# start_date and stop_date can be any format recognized by pd.to_datetime().
-	# freq must be one of ['d','w','m'] meaning daily, weekly, monthly.
+	'''
+	Create url to download raw CSV data from Yahoo! Finance.
+	start_date and stop_date can be any format recognized by pd.to_datetime().
+	freq must be one of ['d','w','m'] meaning daily, weekly, monthly.
+	'''
 	
 	symbol 		= symbol.upper()
 	start_date 	= pd.to_datetime(start_date)
@@ -48,11 +49,13 @@ def make_url(
 	return yurl
 
 def get_table(*args,**kwargs):
-	# Get raw data from Yahoo! Finance, clean it up, and return a DataFrame.
-	# Inputs should be same as url() function.
-	# Index will be DatetimeIndex of selected frequency.
-	# CAUTION: Only includes days on which exchange was open! 
-	
+	'''
+	Get raw data from Yahoo! Finance, clean it up, and return a DataFrame.
+	Inputs should be same as url() function.
+	Index will be DatetimeIndex of selected frequency.
+	CAUTION: Only includes days on which exchange was open! 
+	'''
+
 	# Get raw table
 	url 	= make_url(*args,**kwargs)
 	raw_df 	= pd.read_csv(url)
@@ -93,7 +96,7 @@ def get_table(*args,**kwargs):
 	event_types = extra_stuff['EventType'].unique()
 	has_events 	= len(event_types) > 0
 
-	# Store dividends in main DataFrame, if they exist
+	# Store dividends, if they exist
 	df['Dividend'] = 0.0
 	if has_events:
 		if ('DIVIDEND' in event_types):
@@ -127,10 +130,12 @@ def load(
 	stop_date	= dt.date.today(),
 	freq		= 'd',
 	verbose		= True):
-	# Get data for multiple symbols. Returns a dictionary of DataFrames.
-	# Each DataFrame stores one variable (e.g 'TotalValue') for all symbols.
-	# symbol_list should be a list of strings, e.g. ['SPY','AAPL','^GSPC']
-	# Set verbose = False to disable printing to screen.
+	'''
+	Get data for multiple symbols. Returns a dictionary of DataFrames.
+	Each DataFrame stores one variable (e.g 'TotalValue') for all symbols.
+	symbol_list should be a list of strings, e.g. ['SPY','AAPL','^GSPC']
+	Set verbose = False to disable printing to screen.
+	'''
 	
 	start_date 	= pd.to_datetime(start_date)
 	stop_date	= pd.to_datetime(stop_date)
