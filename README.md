@@ -1,7 +1,7 @@
 # YahooStocks
 
-YahooStocks is a short, simple Python module for importing Yahoo! Finance historical data into pandas.
+YahooStocks is a short, simple Python module for importing Yahoo! Finance chart data.
 
 It includes two different adjusted closing prices which account for splits and dividends. 'Adj Close' is Yahoo's adjusted price. For back-testing strategies, 'TotalValue' may be more useful.
 
-For examples, see the YahooStocks.ipynb IPython Notebook.
+Click on [YahooStocks.ipynb](https://github.com/samkennerly/YahooStocks/blob/master/YahooStocks.ipynb) to see a demonstration as a Jupyter notebook.
