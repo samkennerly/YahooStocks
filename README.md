@@ -1,4 +1,4 @@
-# YahooStocks
+# YahooStocks [Python 3]
 
 [yahoo_stocks.py](https://github.com/samkennerly/YahooStocks/blob/master/yahoo_stocks.py) is a simple Python module for importing Yahoo! Finance chart data.
 
