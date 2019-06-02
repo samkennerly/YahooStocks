@@ -1,3 +1,16 @@
-# python caches
-.ipynb_checkpoints/
+# Apple
+.DS_Store*
+.Spotlight-*
+.Trashes
+.fseventsd
+Thumbs.db
+
+# Python
+*.py[cod]
+*.egg
+*.egg-info
 __pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv
+jupyter_notebook_config.*
